@@ -1,0 +1,73 @@
+# ==========================================
+# Environment & Secrets (환경변수 및 보안)
+# ==========================================
+.env
+.env.local
+.env.*.local
+*.pem
+*.crt
+*.key
+*.pfx
+*.keystore
+
+# ==========================================
+# Docker Volumes & Persistent Data (데이터 볼륨)
+# ==========================================
+# 로컬 스토리지에 직접 바인드 마운트할 경우 배제
+data_volumes/
+volumes/
+docker/*/data/
+
+# Databases & Object Stores
+*.sqlite
+*.sqlite3
+*.db
+
+# ==========================================
+# Application / Infrastructure Logs (로그 파일)
+# ==========================================
+*.log
+logs/
+docker/*/*.log
+
+# ==========================================
+# AI Models & Vector Storage (대용량 AI 아티팩트)
+# ==========================================
+# Ollama 모델 파일 및 Qdrant 데이터 로컬 보관 시 배제
+docker/ai/models/
+docker/ai/qdrant_storage/
+
+# ==========================================
+# System & OS Files (운영체제 및 IDE 설정)
+# ==========================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IDEs & Editors
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+
+# ==========================================
+# Temporary & Backup Files (임시 및 백업 파일)
+# ==========================================
+*.tmp
+*.bak
+*.swp
+scripts/backup/*
+!scripts/backup/.gitkeep

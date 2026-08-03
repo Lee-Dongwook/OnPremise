@@ -1,0 +1,15 @@
+gitea.local {
+    reverse_proxy git-gitea:3000
+}
+
+minio.local {
+    reverse_proxy data-minio:9001
+}
+
+ai.local {
+    reverse_proxy ai-open-webui:8080
+}
+
+grafana.local {
+    reverse_proxy obs-grafana:3000
+}

@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  gitea:
+    image: gitea/gitea:1.22-rootless
+    container_name: git-gitea
+    restart: always
+    ports:
+      - "3000:3000"
+      - "2222:2222"
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+      - GITEA__database__DB_TYPE=postgres
+      - GITEA__database__HOST=data-postgres:5432
+      - GITEA__database__NAME=gitea
+      - GITEA__database__USER=${POSTGRES_USER}
+      - GITEA__database__PASS=${POSTGRES_PASSWORD}
+    volumes:
+      - giteadata:/var/lib/gitea
+    networks:
+      - onprem-net
+
+  runner:
+    image: gitea/act_runner:latest
+    container_name: git-runner
+    restart: always
+    environment:
+      - GITEA_INSTANCE_URL=http://git-gitea:3000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - runnerdata:/data
+    networks:
+      - onprem-net
+
+networks:
+  onprem-net:
+    external: true
+
+volumes:
+  giteadata:
+  runnerdata:
